@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Detalle del Estudiante</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2 th:text="${titulo}">Detalle del Estudiante</h2>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>Identificación:</strong> <span th:text="${estudiante.identificacion}"></span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Nombres:</strong> <span th:text="${estudiante.nombres}"></span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Apellidos:</strong> <span th:text="${estudiante.apellidos}"></span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Semestre Actual:</strong> <span th:text="${estudiante.semestre_actual}"></span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Programa Académico:</strong> <span th:text="${estudiante.programa.nombrePrograma}"></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer text-center">
+                    <a th:href="@{/academia/matriculanueva/} + ${estudiante.id}" class="btn btn-success me-2">
+                        <i class="bi bi-book"></i> Matricular Materias
+                    </a>
+                    <a href="/academia/estudianteslistar" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Volver al Listado
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
+</body>
+</html>

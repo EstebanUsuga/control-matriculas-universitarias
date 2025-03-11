@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Selección de Materias</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <script src="/js/script.js"></script>
+</head>
+<body onload="sumarCreditos()">
+<div class="container mt-5">
+    <h1 class="text-center" >Selecciona los cursos</h1>
+    <form method="post" th:action="@{/academia/matriculaguardar}">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="mb-3">Materias Disponibles</h4>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Seleccionar</th>
+                        <th>Materia</th>
+                        <th>Créditos</th>
+                        <th>Departamento</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <input type="hidden" name="estudianteId" th:value="${estudiante.getId()}">
+                    <tr th:each="curso : ${cursos}">
+                        <td>
+                            <input type="checkbox" class="form-check-input materia-checkbox"
+                                   th:name="cursoIds" th:value="${curso.id}" th:checked="${curso.estaMatriculado}"
+                                   th:attr="data-creditos=${curso.asignatura.numeroCreditos}"
+                                   onchange="sumarCreditos()">
+                        </td>
+                        <td th:text="${curso.asignatura.nombre}"></td>
+                        <td th:text="${curso.asignatura.numeroCreditos}"></td>
+                        <td th:text="${curso.asignatura.departamento}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="mt-4">
+                    <h5>Total Créditos: <span id="total-creditos">0</span></h5>
+                    <div id="error-message" class="text-danger d-none">No puedes exceder los 22 créditos.</div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 text-end">
+            <button type="submit" class="btn btn-success" id="btn-guardar-materias">Guardar Materias</button>
+            <button type="button" class="btn btn-secondary" onclick="history.back()">Volver</button>
+        </div>
+    </form>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Script para gestionar la suma de créditos -->
+
+</body>
+</html>
